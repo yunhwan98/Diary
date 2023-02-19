@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-const DiaryEditor = () => {
+const DiaryEditor = ({ onCreate }) => {
   //DOM 요소 접근
   const authorInput = useRef();
   const contentInput = useRef();
@@ -28,7 +28,17 @@ const DiaryEditor = () => {
       contentInput.current.focus();
       return;
     }
+
+    //상태 끌어올리기
+    onCreate(state.author, state.content, state.emotion);
     alert("저장성공");
+
+    //초기화
+    setState({
+      author: "",
+      content: "",
+      emotion: 1,
+    });
   };
 
   return (
